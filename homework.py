@@ -102,6 +102,8 @@ def alphabet():
     for c in string.ascii_letters:
         dict_abc[i] = c
         i = i + 1
+        if i > 25:
+            break
     print(dict_abc)
     """
     Create dict which keys is alphabetic characters. And values their number in alphabet
