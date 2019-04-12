@@ -145,13 +145,7 @@ def alphabet():
         alphabet()
         >>> {"a": 1, "b": 2 ...}
     """
-    dict_abc = {}
-    i = 1
-    for c in string.ascii_lowercase:
-        dict_abc[i] = c
-        i = i + 1
-
-    return dict_abc
+    return dict(zip(string.ascii_lowercase, range(len(string.ascii_lowercase))))
 
 
 def simple_sort(data: List[int]):
@@ -171,4 +165,3 @@ def simple_sort(data: List[int]):
             j += 1
         i += 1
     return data
-
