@@ -2,14 +2,11 @@
 This is a list of functions that should be completed.
 """
 
-
 from typing import Any
 from typing import List
 import string
 
-
 class OurAwesomeException(Exception):
-
     pass
 
 
@@ -18,10 +15,7 @@ def is_two_object_has_same_value(first: Any, second: Any):
     If @first and @second has same value should return True
     In another case should return False
     """
-    if first == second:
-        return True
-    else:
-        return False
+    return first == second
 
 
 def is_two_objects_has_same_type(first: Any, second: Any):
@@ -29,10 +23,7 @@ def is_two_objects_has_same_type(first: Any, second: Any):
     If @first and @second has same type should return True
     In another case should return False
     """
-    if type(first) == type(second):
-        return True
-    else:
-        return False
+    return type(first) == type(second)
 
 
 def is_two_objects_is_the_same_objects(first: Any, second: Any):
@@ -41,10 +32,7 @@ def is_two_objects_is_the_same_objects(first: Any, second: Any):
     In another case should return False
     """
 
-    if first is second:
-        return True
-    else:
-        return False
+    return first is second
 
 
 def multiple_ints(first_value: int, second_value: int):
@@ -61,12 +49,10 @@ def multiple_ints(first_value: int, second_value: int):
     Returns:
         Product of elements
     """
-    if type(first_value) != type(int) or type(second_value) != type(int):
+    if first_value or second_value is not type(int):
         raise ValueError
-    else:
-        product_of_elements = first_value * second_value
 
-    return product_of_elements
+    return first_value * second_value
 
 
 def multiple_ints_with_conversion(first_value: Any, second_value: Any):
@@ -96,8 +82,14 @@ def multiple_ints_with_conversion(first_value: Any, second_value: Any):
             print("Not valid input data")
         >>> "Not valid input data"
     """
-    if type(first_value) is not int or type(second_value) is not int:
-        raise ValueError()
+    try:
+        first_value = int(first_value)
+        second_value = int(second_value)
+    except ValueError:
+        print("Not valid input data")
+    except ZeroDivisionError:
+        print("ZeroDivisionError")
+
     return first_value * second_value
 
 
@@ -116,10 +108,7 @@ def is_word_in_text(word: str, text: str):
         is_word_in_text("Glad", "Nice to meet you ")
         >>> False
     """
-    if word in text:
-        return True
-    else:
-        return False
+    return word in text
 
 
 def some_loop_exercise() -> list:
@@ -144,6 +133,7 @@ def remove_from_list_all_negative_numbers(data: List[int]):
         >>> [1, 5, 8]
     """
     remove_negativ = [item for item in data if item >= 0]
+
     return remove_negativ
 
 
@@ -155,13 +145,12 @@ def alphabet():
         alphabet()
         >>> {"a": 1, "b": 2 ...}
     """
-    dict_abc = dict()
+    dict_abc = {}
     i = 1
-    for c in string.ascii_letters:
+    for c in string.ascii_lowercase:
         dict_abc[i] = c
         i = i + 1
-        if i > 26:
-            break
+
     return dict_abc
 
 
@@ -173,10 +162,13 @@ def simple_sort(data: List[int]):
         >>> [1, 2, 2, 3, 6, 7, 9]
     Returns:
     """
-    sortlist = []
-    while data:
-        m = min(data)  # using the built-in 'min' function
-        data.remove(m)
-        sortlist.append(m)
+    i = 0
+    while i < len(data) - 1:
+        j = 0
+        while j < len(data) - i - 1:
+            if data[j] > data[j + 1]:
+                data[j], data[j + 1] = data[j + 1], data[j]
+            j += 1
+        i += 1
+    return data
 
-    return sortlist
