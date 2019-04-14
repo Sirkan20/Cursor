@@ -147,10 +147,8 @@ def simple_sort(data: List[int]):
         >>> [1, 2, 2, 3, 6, 7, 9]
     Returns:
     """
-    i = 0
-    while i < len(data) - 1:
-        j = 0
-        while j < len(data) - i - 1:
+    for i in range(len(data) - 1):
+        for j in range((len(data) - i) - 1):
             if data[j] > data[j + 1]:
                 data[j], data[j + 1] = data[j + 1], data[j]
             j += 1
