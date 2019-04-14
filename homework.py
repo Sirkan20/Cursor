@@ -1,3 +1,4 @@
+
 """
 This is a list of functions that should be completed.
 """
@@ -30,7 +31,7 @@ def is_two_objects_has_same_type(first: Any, second: Any):
 
 def is_two_objects_is_the_same_objects(first: Any, second: Any):
     """
-    If @first and @second has same type should return True
+    If @first and @second has same object return True
     In another case should return False
     """
 
@@ -80,14 +81,9 @@ def multiple_ints_with_conversion(first_value: Any, second_value: Any):
         >>> "Not valid input data"
     """
     try:
-        first_value = int(first_value)
-        second_value = int(second_value)
+        return int(first_value) * int(second_value)
     except ValueError:
-        print("Not valid input data")
-    except ZeroDivisionError:
-        print("ZeroDivisionError")
-
-    return first_value * second_value
+        raise OurAwesomeException
 
 
 def is_word_in_text(word: str, text: str):
