@@ -1,154 +1,151 @@
-
-"""
-This is a list of functions that should be completed.
-"""
+import random
 import string
+from typing import List, Dict, Union, Generator
 
-from typing import Any
+# We will work with such dicts
+ST = Dict[str, Union[str, int]]
+# And we will put this dicts in list
+DT = List[ST]
 
-from typing import List
+
+def task_1_fix_names_start_letter(data: DT) -> DT:
+    """
+    Make all `names` field in list of students to start from upper letter
+
+    Examples:
+        fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
+        >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
+    """
+    i = 0
+    for lis in data:
+        for key, values in lis.items():
+            if key == 'name':
+                lis[key] = values.capitalize()
+        data[i] = lis
+        i = i + 1
+
+    return data
 
 
-class OurAwesomeException(Exception):
+def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
+    """given_data
+    Remove from dictionaries given key value
+
+    Examples:
+       remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
+        >>> [{'name': 'Alex'}, {'name': 'denys'}]
+    """
+    new_data = list()
+    redundant_keys = list()
+    for element in data:
+        elements = {key: value for key, value in element.items() if key not in redundant_keys}
+        new_data.append(elements)
+    return new_data
+
+
+def task_3_find_item_via_value(data: DT, value) -> DT:
+    """
+    Find and return all items that has @searching value in any key
+    Examples:
+        find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
+        >>> [{'name': 'Alex', 'age': 26}]
+    """
+    new_data = list()
+    value_to_search = value
+    for element in data:
+        elements = {key: value for value, key in element.items() if value == value_to_search}
+        new_data.append(elements)
+    return new_data
+
+
+def task_4_min_value_integers(data: List[int]) -> int:
+    """
+    Find and return minimum value from list
+    """
+    try:
+        return min(data)
+    except ValueError:
+        pass
+
+
+def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
+    """
+    Find the longest string
+    """
+    try:
+        return str(min(data, key=lambda i: len(str(i))))
+    except ValueError:
+        pass
+
+
+def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
+    """
+    Find minimum value by given key
+    Returns:
+
+    """
+    a = []
+    for i in data:
+        if key in i.keys():
+            a.append(i[key])
+    return min(a)
+
+
+def task_7_max_value_list_of_lists(data: List[List[int]]) -> int:
+    """
+    Find max value from list of lists
+    """
+    new = []
+    for elements in data:
+        new.append(max(elements))
+    return max(new)
+
+
+def task_8_sum_of_ints(data: List[int]) -> int:
+    """
+    Find sum of all items in given list
+    """
+    sum_of = int()
+    for element in data:
+        sum_of = sum_of + element
+    return sum_of
+
+
+def task_9_sum_characters_positions(text: str) -> int:
+    """
+    Please read first about ascii table.
+    https://python-reference.readthedocs.io/en/latest/docs/str/ASCII.html
+    You need to calculate sum of decimal value of each symbol in text
+
+    Examples:
+        task_9_sum_characters_positions("A")
+        >>> 65
+        task_9_sum_characters_positions("hello")
+        >>> 532
+    """
+    return sum(ord(i) for i in text)
+
+
+def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
+    """
+    Return generator of simple numbers
+    Stop then iteration if returned value is more than 200
+    Examples:
+        a = task_10_generator_of_simple_numbers()
+        next(a)
+        >>> 2
+        next(a)
+        >>> 3
+    """
     pass
 
 
-def is_two_object_has_same_value(first: Any, second: Any):
+def task_11_create_list_of_random_characters() -> List[str]:
     """
-    If @first and @second has same value should return True
-    In another case should return False
+    Create list of 20 elements where each element is random letter from latin alphabet
+
     """
-    return first == second
-
-
-def is_two_objects_has_same_type(first: Any, second: Any):
-    """
-    If @first and @second has same type should return True
-    In another case should return False
-    """
-    return type(first) == type(second)
-
-
-def is_two_objects_is_the_same_objects(first: Any, second: Any):
-    """
-    If @first and @second has same object return True
-    In another case should return False
-    """
-
-    return first is second
-
-
-def multiple_ints(first_value: int, second_value: int):
-    """
-    Should calculate product of all args.
-    if first_value or second_value is not int should raise ValueError
-    Raises:
-        ValueError
-    Paramещз
-
-        first_value: value for multiply
-        second_value
-    Returns:
-        Product of elements
-    """
-    if (first_value is not type(int)) or (second_value is not type(int)):
-        raise ValueError
-    else:
-        return first_value * second_value
-
-
-def multiple_ints_with_conversion(first_value: Any, second_value: Any):
-    """
-    If possible to convert arguments to int value - convert and multiply them.
-    If it is impossible raise OurAwesomeException
-    Args:
-        first_value: number for multiply
-        second_value: number for multiply
-    Raises:
-        OurAwesomeException
-    Returns: multiple of two numbers.
-    Examples:
-        multiple_ints_with_conversion(6, 6)
-        >>> 36
-        multiple_ints_with_conversion(2, 2.0)
-        >>> 4
-        multiple_ints_with_conversion("12", 1)
-        >>> 12
-        try:
-            multiple_ints_with_conversion("Hello", 2)
-        except ValueError:
-            print("Not valid input data")
-        >>> "Not valid input data"
-    """
-    try:
-        return int(first_value) * int(second_value)
-    except ValueError:
-        raise OurAwesomeException
-
-
-def is_word_in_text(word: str, text: str):
-    """
-    If text contain word return True
-    In another case return False.
-    Args:
-        word: Searchable substring
-        text: Text for searching
-    Examples:
-        is_word_in_text("Hello", "Hello word")
-        >>> True
-        is_word_in_text("Glad", "Nice to meet you ")
-        >>> False
-    """
-    return word in text
-
-
-def some_loop_exercise() -> list:
-    """
-    Use loop to create list that contain int values from 0 to 12 except 6 and 7
-    """
-    list_of_loop = []
-    for i in range(13):
-        if i in (6, 7):
-            continue
-        list_of_loop.append(i)
-    return list_of_loop
-
-
-def remove_from_list_all_negative_numbers(data: List[int]):
-    """
-    Use loops to solve this task.
-    You could use data.remove(negative_number) to solve this issue.
-    Also you could create new list with only positive numbers.
-    Examples:
-        remove_from_list_all_negative_numbers([1, 5, -7, 8, -1])
-        >>> [1, 5, 8]
-    """
-    remove_negativ = [item for item in data if item >= 0]
-
-    return remove_negativ
-
-
-def alphabet():
-    """
-    Create dict which keys is alphabetic characters. And values their number in alphabet
-    Notes You could see an implementaion of this one in test, but create another one
-    Examples:
-        alphabet()
-        >>> {"a": 1, "b": 2 ...}
-    """
-    return dict(zip(string.ascii_lowercase, range(len(string.ascii_lowercase))))
-
-
-def simple_sort(data: List[int]):
-    """
-    Sort list of ints without using built-in methods.
-    Examples:
-        simple_sort([2, 9, 6, 7, 3, 2, 1])
-        >>> [1, 2, 2, 3, 6, 7, 9]
-    Returns:
-    """
-    for i in range(len(data) - 1):
-        for j in range((len(data) - i) - 1):
-            if data[j] > data[j + 1]:
-                data[j], data[j + 1] = data[j + 1], data[j]
-    return data
+    lis = []
+    while len(lis) <= 19:
+        lis.append(random.choice(string.ascii_lowercase))
+    return lis
