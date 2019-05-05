@@ -16,14 +16,10 @@ def task_1_fix_names_start_letter(data: DT) -> DT:
         fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
         >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
     """
-    i = 0
-    for lis in data:
-        for key, values in lis.items():
-            if key == 'name':
-                lis[key] = values.capitalize()
-        data[i] = lis
-        i = i + 1
-
+    for element in data:
+        for k in element:
+            if k == 'name':
+                element[k] = element[k].capitalize()
     return data
 
 
@@ -33,14 +29,11 @@ def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
 
     Examples:
        remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
-        >>> [{'name': 'Alex'}, {'name': 'denys'}]
     """
-    new_data = list()
-    redundant_keys = list()
     for element in data:
-        elements = {key: value for key, value in element.items() if key not in redundant_keys}
-        new_data.append(elements)
-    return new_data
+        for key in redundant_keys:
+            del element[key]
+    return data
 
 
 def task_3_find_item_via_value(data: DT, value) -> DT:
@@ -50,12 +43,8 @@ def task_3_find_item_via_value(data: DT, value) -> DT:
         find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
         >>> [{'name': 'Alex', 'age': 26}]
     """
-    new_data = list()
-    value_to_search = value
-    for element in data:
-        elements = {key: value for value, key in element.items() if value == value_to_search}
-        new_data.append(elements)
-    return new_data
+    data_new = list(filter(lambda x: x.get('name') == value, data))
+    return data_new
 
 
 def task_4_min_value_integers(data: List[int]) -> int:
@@ -84,21 +73,15 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
     Returns:
 
     """
-    a = []
-    for i in data:
-        if key in i.keys():
-            a.append(i[key])
-    return min(a)
+    a = min(filter(lambda x: key in x, data), key=lambda x: x[key])
+    return a
 
 
 def task_7_max_value_list_of_lists(data: List[List[int]]) -> int:
     """
     Find max value from list of lists
     """
-    new = []
-    for elements in data:
-        new.append(max(elements))
-    return max(new)
+    return max([max(i, default=0) for i in data])
 
 
 def task_8_sum_of_ints(data: List[int]) -> int:
