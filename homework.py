@@ -43,18 +43,14 @@ def task_3_find_item_via_value(data: DT, value) -> DT:
         find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
         >>> [{'name': 'Alex', 'age': 26}]
     """
-    data_new = list(filter(lambda x: x.get('name') == value, data))
-    return data_new
+    return [x for x in data if value in x.values()]
 
 
 def task_4_min_value_integers(data: List[int]) -> int:
     """
     Find and return minimum value from list
     """
-    try:
-        return min(data)
-    except ValueError:
-        pass
+    return min(data, default=None)
 
 
 def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
@@ -120,7 +116,22 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
         next(a)
         >>> 3
     """
-    pass
+    def generator_of_simple_numbers(x):
+        if x > 1:
+            primes_found = [(2, 4)]
+            yield 2
+            for n in range(3, x + 1, 2):
+                for p, ps in primes_found:
+                    if ps > n:
+                        primes_found.append((n, n * n))
+                        yield n
+                        break
+                    else:
+                        if not n % p:
+                            break
+
+    for i in generator_of_simple_numbers(200):
+        yield (i)
 
 
 def task_11_create_list_of_random_characters() -> List[str]:
