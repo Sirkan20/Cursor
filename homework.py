@@ -32,7 +32,7 @@ def task_2_remove_dict_fields(data: DT, redundant_keys: List[str]) -> DT:
     """
     for element in data:
         for key in redundant_keys:
-            del element[key]
+            element.pop(key, None)
     return data
 
 
@@ -57,10 +57,7 @@ def task_5_min_value_strings(data: List[Union[str, int]]) -> str:
     """
     Find the longest string
     """
-    try:
-        return str(min(data, key=lambda i: len(str(i))))
-    except ValueError:
-        pass
+    return str(min(data, key=lambda i: len(str(i)), default=None))
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
@@ -69,8 +66,7 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
     Returns:
 
     """
-    a = min(filter(lambda x: key in x, data), key=lambda x: x[key])
-    return a
+    return min(filter(lambda x: key in x, data), key=lambda x: x[key])
 
 
 def task_7_max_value_list_of_lists(data: List[List[int]]) -> int:
@@ -84,10 +80,7 @@ def task_8_sum_of_ints(data: List[int]) -> int:
     """
     Find sum of all items in given list
     """
-    sum_of = int()
-    for element in data:
-        sum_of = sum_of + element
-    return sum_of
+    return sum(data, 0)
 
 
 def task_9_sum_characters_positions(text: str) -> int:
@@ -139,7 +132,8 @@ def task_11_create_list_of_random_characters() -> List[str]:
     Create list of 20 elements where each element is random letter from latin alphabet
 
     """
-    lis = []
-    while len(lis) <= 19:
-        lis.append(random.choice(string.ascii_lowercase))
-    return lis
+    # lis = []
+    # for i in string.ascii_lowercase:
+    #     lis.append(random.choice(string.ascii_lowercase))
+    lis = [random.choice(string.ascii_lowercase) for x in string.ascii_lowercase]
+    return lis[0:20]
