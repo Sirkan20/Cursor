@@ -19,7 +19,7 @@ def task_1_fix_names_start_letter(data: DT) -> DT:
     for element in data:
         for k in element:
             if k == 'name':
-                element[k] = element[k].capitalize()
+                element[k] = element[k].title()
     return data
 
 
