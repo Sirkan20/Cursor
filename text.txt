@@ -1,0 +1,3 @@
+Lets check factorials
+Put your number here: You put number 5, factorial is 120
+Lens of digit is 3 digits
