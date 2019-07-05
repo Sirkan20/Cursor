@@ -1,5 +1,5 @@
 print('Lets check factorials')
-number = int(input('Put your number here: '))
+number = int(input('Put your number here Man: '))
 fib_number = 1
 fib_number2 = 1
 for i in  range(1, number+1):
